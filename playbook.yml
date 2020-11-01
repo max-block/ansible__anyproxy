@@ -1,0 +1,16 @@
+- hosts: servers
+  tasks:
+    - name: Run NodeSource setup script
+      shell: curl -sL https://deb.nodesource.com/setup_15.x | bash -
+      args:
+        warn: no
+
+    - name: Install apt packages
+      apt: pkg=nodejs state=latest
+
+    - name: Install npm packages
+      npm: name={{ item }} global=yes
+      with_items: ['pm2', 'anyproxy']
+
+    - name: Start anyproxy
+      shell: pm2 start anyproxy -- --port {{ proxy_port }}

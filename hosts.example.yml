@@ -1,0 +1,9 @@
+servers:
+  hosts:
+    server-1:
+    server-2:
+    server-3:
+
+  vars:
+    proxy_port: '1234'
+    ansible_python_interpreter: /usr/bin/python3
